@@ -1,24 +1,61 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column        | Type   | Options                   |
+| ------------- | ------ | ------------------------- |
+| nickname      | string | null: false               |
+| email         | string | null: false, unique: true |
+| password      | string | null: false               |
+| lastname      | string | null: false               |
+| firstname     | string | null: false               | 
+| lastnamekana  | string | null: false               |
+| firstnamekana | string | null: false               |
+| birthday      | string | null: false               |
 
-* Ruby version
+### Association
+- has_many :items
+- has_many :oders
 
-* System dependencies
 
-* Configuration
+## items テーブル
+| Column      | Type       | Options                        |
+| ----------- | ------     | ------------------------------ |
+| item        | string     | null: false                    |
+| explanation | text       | null: false                    |
+| category    | string     | null: false                    |
+| state       | string     | null: false                    |
+| charge      | string     | null: false                    |
+| region      | string     | null: false                    |
+| days        | string     | null: false                    |
+| price       | string     | null: false                    |
+| user_id     | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
+- belongs_to :users
+- has_one :oders 
 
-* Database initialization
+## address テーブル
+| Column         | Type   | Options     |
+| -------------- | ------ | ----------- |
+| postcode       | string | null: false |
+| prefectures    | string | null: false |
+| municipalities | string | null: false |
+| streetaddress  | string | null: false |
+| buildingname   | text   |             |
+| phone          | string | null: false |
 
-* How to run the test suite
+### Association
+has_one :oders
 
-* Services (job queues, cache servers, search engines, etc.)
+## oders テーブル
+| Column     | Type       | Options                        |
+| ---------- | ---------- | ------------------------------ |
+| user_id    | references | null: false, foreign_key: true |
+| item_id    | references | null: false, foreign_key: true |
+| address_id | referenced | null: false, foreign_key: true |
 
-* Deployment instructions
-
-* ...
+### Association
+- belongs_to :users
+- belongs_to :items
+- belongs_to :address
