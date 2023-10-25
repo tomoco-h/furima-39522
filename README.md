@@ -27,34 +27,37 @@
 | condition_id  | integer     | null: false                    |
 | charge_id     | integer     | null: false                    |
 | prefecture_id | integer     | null: false                    |
-| days_id       | integer     | null: false                    |
+| shipping_id   | integer     | null: false                    |
 | price         | integer     | null: false                    |
 | user          | references  | null: false, foreign_key: true |
+| order         | references  | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :order
 
 ## addresses テーブル
-| Column         | Type        | Options                        |
-| -------------- | ----------- | ------------------------------ |
-| postcode       | string      | null: false                    |
-| prefecture_id  | integer     | null: false                    |
-| municipalities | string      | null: false                    |
-| streetaddress  | string      | null: false                    |
-| buildingname   | string      |                                |
-| phone          | string      | null: false                    |
-| item           | references  | null: false, foreign_key: true |
+| Column         | Type        | Options     |
+| -------------- | ----------- | ----------- |
+| postcode       | string      | null: false |
+| prefecture_id  | integer     | null: false |
+| municipalities | string      | null: false |
+| streetaddress  | string      | null: false |
+| buildingname   | string      |             |
+| phone          | string      | null: false |
+| item           | references  | null: false |
 
 ### Association
-- has_one :order
+- belongs_to :order
 
 ## orders テーブル
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
 | user       | references | null: false, foreign_key: true |
 | item       | references | null: false, foreign_key: true |
+| addresses  | references | null: false, foreign_key: true |
 
 ### Association
+- has_one :address
 - belongs_to :user
 - belongs_to :item
