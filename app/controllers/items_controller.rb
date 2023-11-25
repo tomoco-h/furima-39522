@@ -4,7 +4,17 @@ class ItemsController < ApplicationController
   def index
   end
 
-  # private
+  def new
+  end
+  
+  def create
+  end
+
+  private
+
+  def items_params
+    params.require(:items).permit(:name, :image).merge(user_id: current_user.id)
+  end
 
   # def move_to_index
   #   return if user_signed_in?
