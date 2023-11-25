@@ -2,12 +2,20 @@ class ItemsController < ApplicationController
   # before_action :move_to_index, except: [:index, :show]
 
   def index
+    @items = Item.all
   end
 
   def new
+    @items = Item.new
   end
   
   def create
+    @items = Items.new(items_params)
+
+    if @items.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
   end
 
   private
