@@ -9,8 +9,8 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping
 
-  validates :name,          presence: true
-  validates :explanation,   presence: true
+  validates :name,          presence: true, length: {minimum: 1, maximum: 40}
+  validates :explanation,   presence: true, length: {minimum: 1, maximum: 1000} 
   validates :category_id,   numericality: { other_than: 1 }
   validates :condition_id,  numericality: { other_than: 1 }
   validates :charge_id ,    numericality: { other_than: 1 }
