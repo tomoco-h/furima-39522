@@ -23,6 +23,30 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def edit
+    @item = Item.find(params[:id])
+
+    unless current_user && current_user.id == @item.user_id
+      redirect_to root_path, alert: "編集権限がありません"
+    end
+
+  end
+
+  def update
+    @item = Item.find(params[:id])
+
+    if @item.update(items_params)
+      redirect_to item_path(@item.id)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+
+    unless current_user && current_user.id == @item.user_id
+      redirect_to root_path, alert: "編集権限がありません"
+      return
+    end
+  end
+
   private
 
   def items_params

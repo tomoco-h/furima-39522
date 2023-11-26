@@ -1,4 +1,4 @@
-function calc (){
+// function calc (){
   const itemPrice = document.getElementById("item-price");
 
   itemPrice.addEventListener('input', function(){
@@ -12,6 +12,6 @@ function calc (){
     profitArea.innerHTML = profit.toLocaleString();
 
   })
-}
+// }
 
-window.addEventListener('load', calc)
+// window.addEventListener('load', calc)
