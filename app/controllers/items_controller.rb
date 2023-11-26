@@ -1,32 +1,33 @@
 class ItemsController < ApplicationController
-  # before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show]
 
   def index
-    @items = Item.all
+    @item = Item.all
   end
 
   def new
-    @items = Item.new
+    @item = Item.new
   end
   
   def create
-    @items = Items.new(items_params)
+    @item = Item.new(items_params)
 
-    if @items.save
+    if @item.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
   def items_params
-    params.require(:items).permit(:name, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :image, :explanation, :category_id, :condition_id, :charge_id, :prefecture_id, :shipping_id, :price).merge(user_id: current_user.id)
   end
 
-  # def move_to_index
-  #   return if user_signed_in?
+  def move_to_index
+    return if user_signed_in?
 
-  #   redirect_to action: :index
-#   end
+    redirect_to new_user_session_path
+  end
 end
