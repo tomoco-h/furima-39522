@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @item = Item.find(params[:item_id])
     @orderform = OrderForm.new
@@ -7,11 +9,11 @@ class OrdersController < ApplicationController
   def create
     @orderform = OrderForm.new(order_params)
     if @orderform.valid?
-      @orderform.save(params, current_user.id)
+      @orderform.save
       redirect_to root_path
     else
       @item = Item.find(params[:item_id])
-      render : index
+      render :index, status: :unprocessable_entity
     end
   end
 
