@@ -14,6 +14,7 @@ class OrderForm
     validates :phone
     validates :phone,           format: { with: /\A\d{10,11}\z/,message: "is invalid. Include hyphen(-)"}
     validates :token
+  end
 
   def save
     order = Order.create(item_id: item_id, user_id: user_id)
