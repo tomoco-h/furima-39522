@@ -1,4 +1,4 @@
-// function calc (){
+function calc (){
   const itemPrice = document.getElementById("item-price");
 
   itemPrice.addEventListener('input', function(){
@@ -12,6 +12,7 @@
     profitArea.innerHTML = profit.toLocaleString();
 
   })
-// }
+}
 
-// window.addEventListener('load', calc)
+window.addEventListener("turbo:load", calc);
+window.addEventListener("turbo:render",calc);
